@@ -1,0 +1,9 @@
+<div class="container">
+    <h2>Database Results</h2>
+
+    <ul>
+        <% getUsers.forEach(function(r) { %>
+            <li><%= r.id %> - <%= r.username %></li>
+        <% }); %>
+    </ul>
+</div>

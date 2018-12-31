@@ -8,12 +8,22 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start:mon": "nodemon index.js",
     "deploy": "git push heroku master",
     "test": "node test.js"
   },
   "dependencies": {
+    "bcrypt": "^3.0.3",
+    "body-parser": "^1.18.3",
+    "connect-mongodb-session": "^2.0.6",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.2.0",
     "ejs": "^2.5.6",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "express-session": "^1.15.6",
+    "mongodb": "^3.1.10",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "request": "^2.81.0",
