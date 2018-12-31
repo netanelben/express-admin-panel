@@ -8,38 +8,11 @@
 <body>
     <% include ../partials/nav.ejs %>
 
-    <div class="page-login">
-        <h3>Login</h3>
-        <form action="/login" method="POST">
-            <label>
-                Username
-                <input type="text" name="username" required />
-            </label>
-            <label>
-                Password
-                <input type="password" name="password" required />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-
-    <div class="page-register">
-        <h3>Register</h3>
-        <form action="/register" method="POST">
-            <label>
-                Username
-                <input type="text" name="username" required />
-            </label>
-            <label>
-                Password
-                <input type="password" name="password" required />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+    Hello <%= username %><br>
+    <a href="/signup">Signup</a> <br>
+    <a href="/login">Login</a>
 
     <%# include ../partials/db.ejs %>
-
 </body>
 
 </html>

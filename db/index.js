@@ -1,6 +1,6 @@
 require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
-const createHash = require('./utils/crypt');
+const { createHash, compareHash } = require('./utils/crypt');
 
 const dbName = process.env.DB_NAME
 const url = process.env.DB_URL;
@@ -12,6 +12,8 @@ function init() {
         client.connect((err) => {
             resolve(client.db(dbName));
         });
+
+        client.close();
     });
 }
 
@@ -39,40 +41,21 @@ class DataBase {
         });
     }
 
-    // static getUserId({ username }) {
-    //     this.client = new MongoClient(url);
+    static getUser({ username, password }, done) {
+        init().then((db) => {
+            const collection = db.collection('users');
 
-    //     this.client.connect((err) => {
-    //         const db = this.client.db(dbName);
-    //         const collection = db.collection('users');
+            collection.findOne({ username }, (err, result) => {
+                const hash = result.password,
+                    isValid = compareHash(password, hash);
 
-    //         return collection.find({ 'username': username });
-    //     });
-    // }
+                isValid.then((results) => {
+                    if (!results) { return done(null, false); }
 
-    // findUsername(db, username) {
-    //     const collection = db.collection('users');
-
-    //     return collection.find({ 'username': username }, (err, result) => result);
-    // }
-
-    // static async getUsers(db) {
-        // this.client = new MongoClient(url);
-
-        // this.client.connect((err) => {
-        //     const db = this.client.db(dbName);
-        //     const collection = db.collection('users');
-
-        //     return await collection.find({});
-        // });
-
-        // collection.find({}).toArray((err, result) => {
-        //     console.log(result);
-        // });
-    // }
-
-    close() {
-        this.client.close();
+                    return done(null, { username });
+                });
+            });
+        });
     }
 }
 

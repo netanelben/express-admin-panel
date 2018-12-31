@@ -1,26 +1,37 @@
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
+require('dotenv').config();
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-// const schema = new Schema({
-//     username: String,
-//     password: String
-// });
+const schema = new Schema({
+    username: String,
+    password: String
+});
 
-// var User = mongoose.model('PowerUsers', schema);
+const connection = mongoose.createConnection(process.env.DB_URL);
+const User = connection.model('User', schema);
 
-// var newUser = new User({
-//     username: '1234',
-//     password: '1234'
-// });
+function addUser(username, password) {
+    const newUser = new User({ username, password });
 
-// newUser.save((err) => {
-//     // Handle error
-// });
+    newUser.save((err) => {
+        // Handle error
+    });
+}
 
-// User.find({}).exec(function (err, result) {
-//     if (!err) {
-//         // Handle result
-//     } else {
-//         // Handle error
-//     };
-// });
+function findUser(username) {
+    User.find({ username })
+    .exec(function (err, result) {
+        if (!err) {
+            // Handle result
+            console.log(err);
+        } else {
+            // Handle error
+            console.log(result);
+        };
+    });
+}
+
+module.exports = {
+    addUser,
+    findUser
+}

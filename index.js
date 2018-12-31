@@ -22,25 +22,16 @@ app
     .use(bodyparser.json())
     .use(bodyparser.urlencoded({ extended: false }))
     .use(cookieparser())
-    .use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }))
+    .use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }))
     .use(passport.initialize())
     .use(passport.session())
     .use(require('express-session')({
         secret: process.env.SESSION_SECRET,
         cookie: { maxAge: 604800000 },
-        store: store,
-        resave: false, saveUninitialized: false
+        store, resave: true, saveUninitialized: true
     }));
 
-setAuth();
+setAuth(passport);
 setRoutes(app);
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
-
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-
-passport.deserializeUser((user, done) => {
-    done(null, user);
-});

@@ -3,21 +3,22 @@ const DataBase = require('../db');
 
 function setRoutes(app) {
     app
-        .get('/', (req, res) => {
-            // console.log('user: ', req.user);
-            // console.log('auth?: ', req.isAuthenticated());
-            console.log('sess: ', JSON.stringify(req.session));
-            res.render('pages/index')
+        .get('/', (req, res) => res.render('pages/index', { username: null }))
+
+        .get('/login', (req, res) => res.render('pages/login'))
+        .get('/signup', (req, res) => res.render('pages/signup'))
+
+        .get('/profile', authMiddleware(), (req, res) => {
+            res.render('pages/index', { username: req.user && req.user.username || null });
         })
 
         .post('/login',
             passport.authenticate('local', {
-                successRedirect: '/',
-                failureRedirect: '/login',
-                failureFlash: true
+                successRedirect: '/profile',
+                failureRedirect: '/login'
             }))
 
-        .post('/register', (req, res) => {
+        .post('/signup', (req, res) => {
             const {
                 username,
                 password
@@ -33,10 +34,22 @@ function setRoutes(app) {
         // })
 
         // .get('/users/:username', (req, res) => {
+        //     const UserModel = require('../db/models/User');
+        //     const username = req.params.username;
         //     const userId = DataBase.getUserId({ username });
 
-        //     res.json({ userId });
+        //     UserModel.findUser(username);
+        //     UserModel.addUser(username, '1234');
+
+        //     res.send('ok');
         // })
+}
+
+function authMiddleware() {
+    return (req, res, next) => {
+        if (!req.isAuthenticated()) { res.redirect('/login'); }
+        return next();
+    }
 }
 
 module.exports = setRoutes;
