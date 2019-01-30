@@ -1,17 +1,18 @@
-const express = require('express');
-const bodyparser = require('body-parser');
-const cookieparser = require('cookie-parser');
-const session = require('express-session');
-const passport = require('passport');
-const MongoDBStore = require('connect-mongodb-session')(session);
-const path = require('path');
-const PORT = process.env.PORT || 5000;
-const setRoutes = require('./router');
-const setAuth = require('./router/auth');
-
-const app = express();
-const store = new MongoDBStore({ uri: process.env.DB_URL, collection: 'sessions' });
 require('dotenv').config();
+
+const express = require('express'),
+    bodyparser = require('body-parser'),
+    cookieparser = require('cookie-parser'),
+    session = require('express-session'),
+    passport = require('passport'),
+    MongoDBStore = require('connect-mongodb-session')(session),
+    path = require('path'),
+    PORT = process.env.PORT || 5000,
+    setRoutes = require('./router'),
+    setAuth = require('./router/auth');
+
+const app = express(),
+    store = new MongoDBStore({ uri: process.env.DB_URL, collection: 'sessions' });
 
 store.on('error', (f) => f);
 
