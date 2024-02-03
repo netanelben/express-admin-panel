@@ -1,48 +1,43 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
-  "engines": {
-    "node": "10.x"
-  },
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "start:mon": "nodemon index.js",
-    "deploy": "git push heroku master",
-    "test": "node test.js"
-  },
-  "dependencies": {
-    "bcrypt": "^3.0.3",
-    "body-parser": "^1.18.3",
-    "connect-mongodb-session": "^2.0.6",
-    "cookie-parser": "^1.4.3",
-    "dotenv": "^6.2.0",
-    "ejs": "^2.5.6",
-    "express": "^4.15.2",
-    "express-session": "^1.15.6",
-    "mongodb": "^3.1.10",
-    "mongoose": "^5.4.1",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
-  },
-  "devDependencies": {
-    "request": "^2.81.0",
-    "tape": "^4.7.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/heroku/node-js-getting-started.git"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/heroku/node-js-getting-started/issues"
-  },
-  "homepage": "https://github.com/heroku/node-js-getting-started#readme",
-  "author": ""
+    "name": "express-admin-panel",
+    "author": "NetanelBen",
+    "version": "1.0.0",
+    "description": "A sample Node.js app using Express 4",
+    "engines": {
+        "node": "20.x"
+    },
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "start:mon": "nodemon index.js",
+        "test": "node test.js"
+    },
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "body-parser": "^1.20.2",
+        "connect-mongodb-session": "^5.0.0",
+        "cookie-parser": "^1.4.6",
+        "dotenv": "^16.4.1",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "express-session": "^1.18.0",
+        "mongodb": "^6.3.0",
+        "mongoose": "^8.1.1",
+        "passport": "^0.7.0",
+        "passport-local": "^1.0.0"
+    },
+    "devDependencies": {
+        "request": "^2.88.2",
+        "tape": "^5.7.4"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/heroku/node-js-getting-started.git"
+    },
+    "keywords": [
+        "node",
+        "heroku",
+        "express"
+    ],
+    "license": "MIT"
 }
